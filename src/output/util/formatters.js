@@ -1,7 +1,7 @@
 /* @flow */
 const remark = require('remark');
 const html = require('remark-html');
-const Syntax = require('doctrine-temporary-fork').Syntax;
+const Syntax = require('doctrine').Syntax;
 const u = require('unist-builder');
 const _rerouteLinks = require('./reroute_links');
 const highlighter = require('../highlighter');

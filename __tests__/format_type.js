@@ -3,7 +3,7 @@
 const _formatType = require('../src/output/util/format_type');
 const LinkerStack = require('../src/output/util/linker_stack');
 const remark = require('remark');
-const parse = require('doctrine-temporary-fork').parse;
+const parse = require('doctrine').parse;
 
 function stringify(children) {
   return remark().stringify({

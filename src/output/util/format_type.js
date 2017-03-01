@@ -1,5 +1,5 @@
 /* @flow */
-const Syntax = require('doctrine-temporary-fork').Syntax;
+const Syntax = require('doctrine').Syntax;
 const u = require('unist-builder');
 
 /**
