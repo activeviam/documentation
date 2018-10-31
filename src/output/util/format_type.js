@@ -132,6 +132,8 @@ function formatType(getHref: Function, node: ?Object): Array<Object> {
       );
     case Syntax.UnionType:
       return commaList(getHref, node.elements, '(', ')', ' | ');
+    case 'IntersectionType':
+      return commaList(getHref, node.elements, '(', ')', ' & ');
     case Syntax.ArrayType:
       return commaList(getHref, node.elements, '[', ']');
     case Syntax.RecordType:

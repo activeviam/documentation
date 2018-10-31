@@ -51,14 +51,27 @@ function inferProperties(comment: Comment): Comment {
         }
         const propertyName = prefixedName(property.key.name, prefix);
         comment.properties = explicitProperties.has(propertyName)
-          // If the property has already been explicitly declared in the JSDoc,
-          // merge the JSDoc information on top of the inferred one.
-          ? comment.properties.map(explicitProperty => (
-            explicitProperty.name === propertyName ? _.merge(inferedPropertyDoc, explicitProperty) : explicitProperty
-          ))
-          // Otherwise, just add the inferred property to the list.
-          : comment.properties.concat(inferedPropertyDoc);
+          ? // If the property has already been explicitly declared in the JSDoc,
+            // merge the JSDoc information on top of the inferred one.
+            comment.properties.map(
+              explicitProperty =>
+                explicitProperty.name === propertyName
+                  ? _.merge(inferedPropertyDoc, explicitProperty)
+                  : explicitProperty
+            )
+          : // Otherwise, just add the inferred property to the list.
+            comment.properties.concat(inferedPropertyDoc);
       });
+    } else if (value.type === 'IntersectionTypeAnnotation') {
+      comment.type = {
+        type: 'IntersectionType',
+        elements: value.types.map(type => {
+          inferProperties(type, prefix);
+          return type.type === 'GenericTypeAnnotation'
+            ? { type: 'NameExpression', name: type.id.name }
+            : { type: 'NameExpression', name: 'Object' };
+        })
+      };
     }
   }
 
