@@ -1,7 +1,7 @@
 {
   "name": "@activeviam/documentation",
   "description": "a documentation generator",
-  "version": "6.3.3",
+  "version": "6.3.3-20181031",
   "author": "Tom MacWright",
   "bin": {
     "documentation": "./bin/documentation.js"
